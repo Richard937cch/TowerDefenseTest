@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random=UnityEngine.Random;
 
-public class MapSystem : MonoBehaviour
+public class MapSystem2 : MonoBehaviour
 {
     public Vector3[] target; //pinpoint position
     GameObject[] pinCylinder; //pinpoint reference
@@ -12,11 +12,9 @@ public class MapSystem : MonoBehaviour
     public GameObject pathcube;
     GameObject[] wall; //wall
     public int targeti = 4; //number of pinpoint
+    public float mapscale = 26.0f;// scale of the map
+
     
-
-    public float Wrange =3.0f; //waypoint spawn Range
-
-    public float mapscale = 26.0f ;// scale of the map
 
 /*
     public GameObject objectToSpawn;
@@ -33,7 +31,6 @@ public class MapSystem : MonoBehaviour
         pinCylinder = new GameObject[targeti];
         pave = new GameObject[targeti-1];
         wall = new GameObject[4];
-        
         /*
         target[0] = new Vector3(Random.Range(2.0f, 24.0f), 0.0f, 0.0f);
         target[1] = new Vector3(1.8f, 0.0f, 1.8f);
@@ -42,7 +39,7 @@ public class MapSystem : MonoBehaviour
         */
 
         //SpawnWaypoint
-        spawnpin2();
+        spawnpin();
 
 
         for (int i=0;i<targeti;i++)//pin cylinder spawn
@@ -272,188 +269,6 @@ public class MapSystem : MonoBehaviour
             else
             {
                 target[a][0] = Random.Range(Convert.ToInt32(target[a][0]+1),mapscalei-1);
-            }
-            
-            lastp = 4;
-        }
-    }
-
-/// <summary>
-/// ///////////////////////////////////////////////////////////
-/// </summary>
-/// 
-
-void spawnpin2() // Spawn Waypoint IN RANGE
-    {
-        int mapscalei = Convert.ToInt32(mapscale);
-        
-        int p0 = Random.Range(1,5);
-        int lastp = p0;
-        //p0p1
-        if (p0==1)
-        {
-            target[0] = new Vector3(Random.Range(1, Wrange), 0.0f, 0.0f);
-            up(1);
-        }
-        else if (p0==2)
-        {
-            target[0] = new Vector3(Random.Range(1, Wrange), 0.0f, mapscale);
-            down(1);
-        }
-        else if (p0==3)
-        {
-            target[0] = new Vector3(mapscale, 0.0f, Random.Range(1, Wrange));
-            left(1);
-        }
-        else if (p0==4)
-        {
-            target[0] = new Vector3(0.0f, 0.0f, Random.Range(1, Wrange));
-            right(1);
-        }
-
-        //p2-pfinal(targeti-1)
-        for (int j=2;j<targeti;j++)
-        {
-            Debug.Log(targeti);
-            int thisp = Random.Range(1,4);
-            if (lastp == 1)
-            {
-                if (thisp == 1)
-                {
-                    up(j);
-                } 
-                else if (thisp == 2)
-                {
-                    left(j);
-                }
-                else if (thisp == 3)
-                {
-                    right(j);
-                }
-                
-            }
-            else if (lastp == 2)
-            {
-                if (thisp == 1)
-                {
-                    down(j);
-                } 
-                else if (thisp == 2)
-                {
-                    left(j);
-                }
-                else if (thisp == 3)
-                {
-                    right(j);
-                }
-            }
-            else if (lastp == 3)
-            {
-                if (thisp == 1)
-                {
-                    up(j);
-                } 
-                else if (thisp == 2)
-                {
-                    down(j);
-                }
-                else if (thisp == 3)
-                {
-                    left(j);
-                }
-            }
-            else if (lastp == 4)
-            {
-                if (thisp == 1)
-                {
-                    up(j);
-                } 
-                else if (thisp == 2)
-                {
-                    down(j);
-                }
-                else if (thisp == 3)
-                {
-                    right(j);
-                }
-            }
-
-            
-        }
-        
-        
-        void up(int a)
-        {
-            target[a] = target[a-1];
-            if (a == targeti-1)
-            {
-                target[a][2] = mapscale;
-                Debug.Log("end");
-            }
-            else if (target[a][2] >= mapscale-Wrange)
-            {
-                target[a][2] = mapscale-1.0f;
-            }
-            else
-            {
-                target[a][2] = Random.Range(Convert.ToInt32(target[a][2]+1),Wrange);
-            }
-            
-            lastp = 1;
-        }
-        void down(int a)
-        {
-            target[a] = target[a-1];
-            if (a == targeti-1)
-            {
-                target[a][2] = 0.0f;
-                Debug.Log("end");
-            }
-            else if (target[a][2] <= Wrange)
-            {
-                target[a][2] = 1.0f;
-            }
-            else
-            {
-                target[a][2] = Random.Range(Convert.ToInt32(target[a][2]-1),Convert.ToInt32(target[a][2]-Wrange));
-            }
-
-            lastp = 2;
-        }
-        void left(int a)
-        {
-            target[a] = target[a-1];
-            if (a == targeti-1)
-            {
-                target[a][0] = 0.0f;
-                Debug.Log("end");
-            }
-            else if (target[a][0] <= Wrange)
-            {
-                target[a][0] = 1.0f;
-            }
-            else
-            {
-                target[a][0] = Random.Range(Convert.ToInt32(target[a][0]-1),Convert.ToInt32(target[a][0]-Wrange));
-            }
-            
-            lastp = 3;
-        }
-        void right(int a)
-        {
-            target[a] = target[a-1];
-            if (a == targeti-1)
-            {
-                target[a][0] = mapscale;
-                Debug.Log("end");
-            }
-            else if (target[a][0] >= mapscale-Wrange)
-            {
-                target[a][0] = mapscale-1.0f;
-            }
-            else
-            {
-                target[a][0] = Random.Range(Convert.ToInt32(target[a][0]+1),Wrange);
             }
             
             lastp = 4;

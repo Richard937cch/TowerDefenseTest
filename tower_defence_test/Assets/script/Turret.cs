@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Turret : MonoBehaviour{
@@ -29,10 +30,14 @@ public class Turret : MonoBehaviour{
     public GameObject bulletPrefab;
     public Transform bulletPosition;
     public Transform head;
+    private Rigidbody ri;
 
     void Start()
     {
         timer = attackRate;
+        //this.Object.Collider.enabled = false;
+        //this.gameObject.Rigidbody.velocity = Vector3.zero;
+        //gameObject.GetComponent<Rigidbody>()= ri;
     }
 
     void Update()
