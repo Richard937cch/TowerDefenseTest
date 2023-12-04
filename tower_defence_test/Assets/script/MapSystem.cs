@@ -42,7 +42,7 @@ public class MapSystem : MonoBehaviour
         */
 
         //SpawnWaypoint
-        spawnpin2();
+        spawnpin();
 
 
         for (int i=0;i<targeti;i++)//pin cylinder spawn
@@ -279,7 +279,7 @@ public class MapSystem : MonoBehaviour
     }
 
 /// <summary>
-/// ///////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// </summary>
 /// 
 

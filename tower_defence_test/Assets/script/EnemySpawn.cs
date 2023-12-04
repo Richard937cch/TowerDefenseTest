@@ -28,6 +28,19 @@ public class EnemySpawn : MonoBehaviour
         //endpoint = mapSystem.target[mapSystem.targeti-1];
     }
 
+    void SpawnEnemy(int i,int d)
+    {
+        
+        //etimer += Time.deltaTime;
+        //Debug.Log("s1");
+        while (timer > d && i>0) //Spawn Enemy
+        {
+            Debug.Log("s2");
+            SpawnOject();
+            i--;
+            timer = 0;
+        }
+    }
     
 
 
@@ -41,18 +54,8 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        void SpawnEnemy(int i,int d)
-    {
-        float etimer = 0.0f;
-        etimer += Time.deltaTime;
-       
-        while (etimer > d && i>0) //Spawn Enemy
-        {
-            SpawnOject();
-            i--;
-            etimer = 0;
-        }
-    }
+    //float etimer = 0.0f;
+        
     
         timer += Time.deltaTime;
         

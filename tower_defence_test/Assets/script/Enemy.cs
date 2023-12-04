@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
 
     PlayerState playerState;
 
+    Animator animator;
+
     void Awake()
     {
         playerState = GameObject.Find("playerState").GetComponent<PlayerState>();
+        //animator = GameObject.Find("Mini simple Characters Animation Controller Demo").GetComponent<Animator>();
     }
 
     public void TakeDamage(int damage)
@@ -25,6 +28,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        //animator.SetBool("Mini Simple Characters Armature|Walk",false);
+        //animator.SetBool()
         Destroy(this.gameObject);
         playerState.enemyTotal -= 1;
     }
