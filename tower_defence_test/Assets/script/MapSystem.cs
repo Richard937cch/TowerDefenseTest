@@ -41,6 +41,9 @@ public class MapSystem : MonoBehaviour
         target[3] = new Vector3(6.8f, 0.0f, 2.8f);
         */
 
+        Random.State stateSeed = Random.state;
+        Debug.Log(JsonUtility.ToJson(stateSeed));
+        Debug.Log(stateSeed);
         //SpawnWaypoint
         spawnpin();
 
