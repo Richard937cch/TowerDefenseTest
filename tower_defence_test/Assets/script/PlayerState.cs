@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerState : MonoBehaviour
 {
@@ -15,12 +17,15 @@ public class PlayerState : MonoBehaviour
     public TextMeshProUGUI win;
     public Image HPbar;
     
-    EnemySpawn enemySpawn;
+    //EnemySpawn enemySpawn;
+    WaveSpawner waveSpawner;
 
     void Awake()
     {
-        enemySpawn = GameObject.Find("EnemyControl").GetComponent<EnemySpawn>();
-        enemyTotal = enemySpawn.enemyi;
+        //enemySpawn = GameObject.Find("EnemyControl").GetComponent<EnemySpawn>();
+        //enemyTotal = enemySpawn.enemyi;
+        waveSpawner = GameObject.Find("EnemyControl").GetComponent<WaveSpawner>();
+
     }
  
     void OnEnable(){
@@ -35,21 +40,25 @@ public class PlayerState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Retry.gameObject.SetActive(false);
+        MainMenu.gameObject.SetActive(false);
+        lose.gameObject.SetActive(false);
+        win.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("PLAY");
         if (PlayerHealth<=0)
         {
             Retry.gameObject.SetActive(true);
             MainMenu.gameObject.SetActive(true);
             lose.gameObject.SetActive(true);
         }
-        else if (PlayerHealth>0 && enemyTotal==0)
+        else if (PlayerHealth>0 && waveSpawner.gameEnd == true)
         {
-            Retry.gameObject.SetActive(true);
+            Retry.gameObject.SetActive(false);
             MainMenu.gameObject.SetActive(true);
             win.gameObject.SetActive(true);
         }

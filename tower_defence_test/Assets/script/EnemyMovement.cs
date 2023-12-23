@@ -10,7 +10,9 @@ public class EnemyMovement : MonoBehaviour
     EnemySpawn enemySpawn;
 
     PlayerState playerState;
-    
+    WaveSpawner waveSpawner;
+    //Wave wave;
+    //
     // The target position.
     //private Transform target;
     //private Vector3 target;
@@ -45,6 +47,9 @@ void Awake()
         mapSystem = GameObject.Find("Terrain").GetComponent<MapSystem>();
         enemySpawn = GameObject.Find("EnemyControl").GetComponent<EnemySpawn>();
         playerState = GameObject.Find("playerState").GetComponent<PlayerState>();
+        waveSpawner = GameObject.Find("EnemyControl").GetComponent<WaveSpawner>();
+        //wave = GameObject.Find("EnemyControl").GetComponent<Wave>();
+
         pini = mapSystem.targeti;
         pin = new Vector3[pini];
         for (int j=0;j<pini;j++)
@@ -95,6 +100,7 @@ void Awake()
             playerState.PlayerHealth -= DamagetoPlayerHealth;
             playerState.enemyTotal -= 1;
             Debug.Log(playerState.PlayerHealth);
+            waveSpawner.DeadCount += 1;
         }
     }
 }

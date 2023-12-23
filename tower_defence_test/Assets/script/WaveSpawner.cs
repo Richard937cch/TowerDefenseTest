@@ -7,19 +7,23 @@ public class WaveSpawner : MonoBehaviour
 
     public Wave[] waves;
     public int currentWaveIndex = 0;
+    //public int SpawnCount = 0;
+    public int DeadCount = 0;
+
+    public bool gameEnd = false;
 
     private bool readyToCountDown;
 
-    MapSystem mapSystem;
+    
     private void Start()
     {
-        mapSystem = GameObject.Find("Terrain").GetComponent<MapSystem>();
-
+        
         readyToCountDown = true;
 
         for (int i = 0; i < waves.Length; i++)
         {
             waves[i].enemiesLeft = waves[i].enemies.Length;
+            
         }
     }
     private void Update()
@@ -27,6 +31,7 @@ public class WaveSpawner : MonoBehaviour
         if (currentWaveIndex >= waves.Length)
         {
             Debug.Log("You survived every wave!");
+            gameEnd = true;
             return;
         }
 
@@ -44,12 +49,14 @@ public class WaveSpawner : MonoBehaviour
             StartCoroutine(SpawnWave());
         }
 
-        if (waves[currentWaveIndex].enemiesLeft == 0)
+        if (DeadCount == waves[currentWaveIndex].enemies.Length )
         {
             readyToCountDown = true;
-
+            DeadCount = 0;
             currentWaveIndex++;
+            
         }
+        
     }
     private IEnumerator SpawnWave()
     {
@@ -58,11 +65,11 @@ public class WaveSpawner : MonoBehaviour
             for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
             {
                 Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i]);
-
-                //enemy.transform.SetParent(mapSystem.p);
+                //SpawnCount +=1;
 
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
             }
+            
         }
     }
 }
