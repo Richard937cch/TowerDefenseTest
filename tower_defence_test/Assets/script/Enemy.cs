@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public int hp = 150;
 
     PlayerState playerState;
+    WaveSpawner waveSpawner;
 
     Animator animator;
     float timer=0;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         playerState = GameObject.Find("playerState").GetComponent<PlayerState>();
+        waveSpawner = GameObject.Find("EnemyControl").GetComponent<WaveSpawner>();
         animator = gameObject.GetComponent<Animator>();
         animator.SetBool("Walk",false);
     }
@@ -30,7 +32,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        animator.SetBool("Walk",true);
+        //animator.SetBool("Walk",true);
         //animator.SetBool()
         
         
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour
             {
                 Destroy(this.gameObject);
                 playerState.enemyTotal -= 1;
+                waveSpawner.DeadCount += 1;
             }
         }
             

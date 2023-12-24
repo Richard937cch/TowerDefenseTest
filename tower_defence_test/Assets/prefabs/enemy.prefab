@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  enemyheight: 0.5
   DamagetoPlayerHealth: 1
 --- !u!114 &-3325753787299560752
 MonoBehaviour:
@@ -167,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4717d1a46b9eee8408b9bbec6980456f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 150
+  hp: 15
 --- !u!135 &8570542873356682771
 SphereCollider:
   m_ObjectHideFlags: 0

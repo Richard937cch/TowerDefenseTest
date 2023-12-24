@@ -49,7 +49,7 @@ public class PlayerState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("PLAY");
+        //Debug.Log("PLAY");
         if (PlayerHealth<=0)
         {
             Retry.gameObject.SetActive(true);
