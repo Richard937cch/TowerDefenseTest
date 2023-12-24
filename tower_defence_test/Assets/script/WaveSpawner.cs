@@ -1,18 +1,26 @@
 using UnityEngine;
 using System.Collections;
+using System;
+
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] private float countdown;
-    [SerializeField] private GameObject spawnpoint;
+    //[SerializeField] private GameObject spawnpoint;
+
+
+    public GameObject e1; //Enemy type 1
+    public GameObject e2; //Enemy type 2
+
 
     public Wave[] waves;
     public int currentWaveIndex = 0;
-    //public int SpawnCount = 0;
+    
     public int DeadCount = 0;
 
     public bool gameEnd = false;
 
     private bool readyToCountDown;
+
 
     
     private void Start()
@@ -64,7 +72,16 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
             {
-                Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i]);
+                if (waves[currentWaveIndex].enemies[i] == "1")
+                {
+                    GameObject newObject = Instantiate(e1);
+                }
+                else if (waves[currentWaveIndex].enemies[i] == "2")
+                {
+                    GameObject newObject = Instantiate(e2);
+                }
+
+                //Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i]);
                 //SpawnCount +=1;
 
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
@@ -77,7 +94,9 @@ public class WaveSpawner : MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public Enemy[] enemies;
+    
+    public string[] enemies;
+    //public Enemy[] enemies;
     public float timeToNextEnemy;
     public float timeToNextWave;
 
